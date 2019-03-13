@@ -1,4 +1,5 @@
 <%= form_for @user do |f| %>
+
   <% if @user.errors.any? %>
     <p><%= pluralize(@user.errors.count, 'error') %> prohibited this user from being saved</p>
     <ul>
@@ -24,10 +25,10 @@
   <%= f.number_field :tickets %><br>
 
   <%= f.label :admin, 'Check box if you are a theme park owner' %>
-  <%= f.check_box :admin %>
+  <%= f.check_box :admin %><br>
 
   <%= f.label :password %>
-  <%= f.password_field :password %>
+  <%= f.password_field :password %><br><br>
 
   <%= f.submit 'Create User' %>
 <% end %>

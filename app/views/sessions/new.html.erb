@@ -1,9 +1,9 @@
-<%= form_for @user, :url => url_for(:controller => 'sessions', :action => 'create') do |f| %>
-  <%= f.label :name, 'Your name' %><br>
-  <%= f.text_field :name %><br>
+<%= form_tag(signin_path) do %>
+  <%= label_tag :name, 'Your name: ' %>
+  <%= collection_select :user, :name, User.all, :name, :name, :include_blank => 'Please select your username from this dropdown' %><br><br>
 
-  <%= f.label :password, 'Your password' %><br>
-  <%= f.password_field :password %>
+  <%= label_tag :password, 'Your password' %><br>
+  <%= password_field_tag :password %><br><br>
 
-  <%= f.submit 'Sign In' %>
+  <%= submit_tag 'Sign In' %>
 <% end %>

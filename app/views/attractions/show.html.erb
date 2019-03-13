@@ -1,7 +1,17 @@
-<%= @attraction.name %>
+<p>Name: <%= @attraction.name %></p>
+<p>Ticket Requirement: <%= @attraction.tickets %></p>
+<p>Height Requirement: <%= @attraction.min_height %></p>
+<p>Nausea Rating: <%= @attraction.nausea_rating %></p>
+<p>Happiness Rating: <%= @attraction.happiness_rating %></p>
 
-<% if admin? %>
-  <%= link_to 'Edit attraction', edit_attraction_path %>
+
+<% if current_user.admin %>
+  <%= link_to 'Edit Attraction', edit_attraction_path %>
+<% else %>
+  <form action = '/rides/new' method = 'post'>
+    <%= tag(:input, type: 'hidden', name: request_forgery_protection_token.to_s, value: form_authenticity_token) %>
+    <%= tag(:input, type: 'hidden', name: :user_id, value: current_user.id) %>
+    <%= tag(:input, type: 'hidden', name: :attraction_id, value: @attraction.id) %>
+    <input type = 'submit' value = 'Go on this ride'>
+  </form>
 <% end %>
-
-<%= link_to 'Go on this ride', rides_new_path(user_id: session[:user_id], attraction_id: @attraction.id) %>

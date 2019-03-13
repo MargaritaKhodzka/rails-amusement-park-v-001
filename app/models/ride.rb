@@ -4,15 +4,15 @@ class Ride < ActiveRecord::Base
 
   def take_ride
     enough_tickets, tall_enough = attraction_requirements
-    
-    if enough_tickets && tall_enough
-      start_ride
-    elsif !enough_tickets && tall_enough
-      'Sorry. You do not have enough tickets to ride the Roller Coaster.'
+
+    if !enough_tickets && !tall_enough
+      'Sorry. ' + ticket_issue + ' ' + height_issue
+    elsif tall_enough && !enough_tickets
+      'Sorry. ' + ticket_issue
     elsif enough_tickets && !tall_enough
-      'Sorry. You are not tall enough to ride the Roller Coaster.'
+      'Sorry. ' + height_issue
     else
-      'Sorry. You do not have enough tickets to ride the Roller Coaster. You are not tall enough to ride the Roller Coaster.'
+      start_ride
     end
   end
 
@@ -34,7 +34,19 @@ class Ride < ActiveRecord::Base
     happiness_level = self.user.happiness + self.attraction.happiness_rating
     nausea_level = self.user.nausea + self.attraction.nausea_rating
     tickets_left = self.user.tickets - self.attraction.tickets
-    self.user.update(:happiness => happiness_level, :nausea => nausea_level, :tickets => tickets_left)
+    self.user.update(
+      happiness: happiness_level,
+      nausea: nausea_level,
+      tickets: tickets_left
+    )
     "Thanks for riding the #{self.attraction.name}!"
+  end
+
+  def ticket_issue
+    "You do not have enough tickets to ride the #{self.attraction.name}."
+  end
+
+  def height_issue
+    "You are not tall enough to ride the #{self.attraction.name}."
   end
 end

@@ -1,14 +1,14 @@
-<% if @user.admin %>
-  <h3>Admin</h3>
+<% if @message %>
+  <p><%= @message %></p>
 <% end %>
 
-<p><%= params[:message] %></p>
+<% if current_user.admin %>
+  <h3>ADMIN</h3>
+<% end %>
 
-<h3>Welcome <%= @user.name %></h3>
+<h3>Welcome, <%= @user.name %>!</h3>
 <p>Mood: <%= @user.mood %></p>
-<p>Height <%= @user.height %></p>
-<p>Tickets <%= @user.tickets %></p>
+<p>Height: <%= @user.height %></p>
+<p>Tickets: <%= @user.tickets %></p>
 
-<%= link_to "See attractions", attractions_path %><br>
-<%= link_to "Edit", edit_user_path(@user) %><br>
-<%= link_to "Log Out", logout_path, method: :delete %>
+<%= link_to 'See attractions', attractions_path %><br>

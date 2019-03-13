@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
-  root 'welcome#home'
-
-  get '/signin', to: 'sessions#new'
-  post '/sessions/create', to: 'sessions#create'
-  delete '/signout', to: 'sessions#destroy'
-
-  post '/rides/new', to: 'rides#new'
-
   resources :users
   resources :attractions
+
+  root 'welcome#home'
+
+  get '/signin' => 'sessions#new'
+  post '/signin' => 'sessions#create'
+  get '/signout' => 'sessions#destroy'
+  post '/rides/new' => 'rides#new'
+
 end

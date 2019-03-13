@@ -15,7 +15,7 @@ class AttractionsController < ApplicationController
 
   def create
     @attraction = Attraction.create(attraction_params)
-    if attraction.save
+    if @attraction.save
       redirect_to @attraction
     else
       render :new
@@ -23,7 +23,6 @@ class AttractionsController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
