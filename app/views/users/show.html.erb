@@ -9,5 +9,6 @@
 <p>Height <%= @user.height %></p>
 <p>Tickets <%= @user.tickets %></p>
 
-<%= link_to 'See attractions', attractions_path %>
-<%= link_to 'Edit', edit_user_path(@user) %>
+<%= link_to "See attractions", attractions_path %><br>
+<%= link_to "Edit", edit_user_path(@user) %><br>
+<%= link_to "Log Out", logout_path, method: :delete %>
